@@ -1,0 +1,38 @@
+---
+ 
+ - name: cssfile
+   hosts: all
+   become: true
+   tasks:
+     - name: folder proj
+       file:
+         dest: /data
+         state: directory
+
+     - name: copy content
+       copy:
+         src: /home/ubuntu/indu/ 
+         dest: /data     
+     - name: docker image new
+       docker_image:
+         name: net1
+         source: build
+         build: 
+           path: /var/lib/jenkins/workspace/ansibledocker/
+           pull: false  
+
+     - name: docker container proj new 
+       docker_container:      
+         name: cs4
+         image: net1
+         detach: true
+         state: started
+         tty: true
+         exposed_ports:
+           - "80" 
+         ports:
+           - "80:80"
+         
+        
+
+
