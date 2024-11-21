@@ -4,27 +4,33 @@
    hosts: all
    become: true
    tasks:
-     - name: folder proj
+     - name: folder data
        file:
          dest: /data
          state: directory
 
+     - name: copy website
+       copy: 
+         src: /home/ubuntu/indu/
+         dest: /data/
+
      - name: copy content
        copy:
-         src: /home/ubuntu/indu/ 
-         dest: /data     
+         src: /var/lib/jenkins/workspace/modware/ 
+         dest: /data/
+         
      - name: docker image new
        docker_image:
-         name: net1
+         name: net2
          source: build
          build: 
-           path: /var/lib/jenkins/workspace/ansibledocker/
+           path: /data/
            pull: false  
 
      - name: docker container proj new 
        docker_container:      
-         name: cs4
-         image: net1
+         name: cs5
+         image: net2
          detach: true
          state: started
          tty: true
