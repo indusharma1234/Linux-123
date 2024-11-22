@@ -6,25 +6,25 @@
    tasks:
      - name: folder data
        file:
-         dest: /home/ubuntu/data
+         dest: /home/ubuntu/indu1
          state: directory
 
      - name: copy website
        copy: 
          src: /var/lib/jenkins/workspace/ansible/indu/
-         dest: /home/ubuntu/data/
+         dest: /home/ubuntu/indu1/
 
      - name: copy content
        copy:
          src: /var/lib/jenkins/workspace/modware/ 
-         dest: /home/ubuntu/data/
+         dest: /home/ubuntu/
          
      - name: docker image new
        docker_image:
          name: net2
          source: build
          build: 
-           path: /home/ubuntu/data/
+           path: /home/ubuntu/
            pull: false  
 
      - name: docker container proj new 
