@@ -11,7 +11,7 @@
 
      - name: copy website
        copy: 
-         src: /home/ubuntu/indu/
+         src: /var/lib/jenkins/workspace/ansible/indu/
          dest: /data/
 
      - name: copy content
